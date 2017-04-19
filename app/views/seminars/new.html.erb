@@ -1,0 +1,70 @@
+<div class='container'>
+  <div class="col-md-4 col-md-offset-4">
+    <%= form_for @seminar, :html => {multipart: true} do |f| %>
+      <% if @seminar.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= pluralize(@seminar.errors.count, "error") %> prohibited
+            this seminars from being saved:
+          </h2>
+          <ul>
+            <% @seminar.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="form-group">
+        <label><%= f.label :title %></label>
+        <%= f.text_field :title, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <label><%= f.label :author %></label>
+        <%= f.text_field :author, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <label><%= f.label :company %></label>
+        <%= f.text_field :company, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <label><%= f.label :price %></label>
+        <%= f.number_field :price, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <label><%= f.label :description %></label>
+        <%= f.text_area :description, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <label for="example-date-input"><%= f.label :start_date %></label>
+        <%= f.date_field :start_date, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <label for="example-date-input"><%= f.label :end_date %></label>
+        <%= f.date_field :end_date, class: "form-control" %>
+      </div>
+      <% if @seminar.photos.exists? %>
+        <% @seminar.photos.each do |z| %>
+          <div class="seminarimage">
+            <% if !z.image_file_size.nil? %>
+              <%= image_tag z.image , class: "showimage" %>
+              <%= link_to "Delete Photo",photo_path(z), :method => :delete  , remote: true , class: "photo_delete"%>
+            <%else%>
+              <p>
+                Προσθέστε μια φωτογραφία στην Αγγελία σας!
+              </p>
+            <%end%>
+          </div>
+        <%end%>
+      <%end%>
+      <div class="control-group">
+        <%= f.label :photos, :class => 'control-label' %>
+        <div class="controls">
+          <%= file_field_tag "images[]", type: :file, multiple: true  %>
+        </div>
+      </div>
+      <%= f.submit nil , class: 'btn-submit' %>
+    </p>
+  <% end %>
+  <%= link_to 'Back', seminars_path %>
+</div>
+</div>
