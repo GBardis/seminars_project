@@ -9,6 +9,7 @@ class CreateSeminars < ActiveRecord::Migration[5.0]
       t.date :start_date
       t.date :end_date
       t.references :user, index: true
+      t.references :catagory,index: true
       t.timestamps
     end
   end

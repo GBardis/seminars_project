@@ -11,7 +11,8 @@ end
 
 
   def new
-    @seminar = Seminar.new
+    @seminar = Seminar.new 
+    @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
 
   def create

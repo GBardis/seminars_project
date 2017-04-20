@@ -1,5 +1,6 @@
 class Seminar < ApplicationRecord
   belongs_to :user
+  belongs_to :category
   has_many :photos, dependent: :destroy, inverse_of: :seminar
  
   validates :title, presence: true
