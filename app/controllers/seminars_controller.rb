@@ -1,14 +1,14 @@
 class SeminarsController < ApplicationController
   respond_to :html, :json
-  before_action :find_seminar, only: [:update,:show,:edit]
-  #  before_action :require_user
+  before_action :find_seminar, only: [:update,:show,:destroy,:edit]
+  before_action :require_user, only:[:new,:edit,:destroy]
   #  before_action :require_owner
 def landing
 end
   def index
+  
       @seminars = Seminar.all
   end
-
 
   def new
     @seminar = Seminar.new 
@@ -18,6 +18,7 @@ end
   def create
    @seminar = Seminar.new(seminars_params)
     @seminar.user_id = current_user.id
+    @seminar.category_id = params[:category_id]
     if @seminar.save
       if params[:images]
         params[:images].each do |image|
@@ -65,12 +66,8 @@ end
 
 
   def destroy
-     @seminar = Seminar.find(params[:id])
   @seminar.destroy
-   respond_to do |format|
-      format.json { head :no_content }
-      format.js   { render layout: false }
-    end
+    redirect_to seminars_path
   end
   private
   def find_seminar

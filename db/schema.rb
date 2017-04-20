@@ -36,10 +36,10 @@ ActiveRecord::Schema.define(version: 20170420124149) do
     t.date     "start_date"
     t.date     "end_date"
     t.integer  "user_id"
-    t.integer  "catagory_id"
+    t.integer  "category_id"
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
-    t.index ["catagory_id"], name: "index_seminars_on_catagory_id"
+    t.index ["category_id"], name: "index_seminars_on_category_id"
     t.index ["user_id"], name: "index_seminars_on_user_id"
   end
 
