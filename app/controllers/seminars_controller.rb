@@ -1,24 +1,21 @@
 class SeminarsController < ApplicationController
   respond_to :html, :json
-  #autocomplete :make, :name
-  #before_action :find_seminar
+  before_action :find_seminar, only: [:update,:show,:edit]
   #  before_action :require_user
   #  before_action :require_owner
-
+def landing
+end
   def index
-    #  @seminars = Seminars.all
+      @seminars = Seminar.all
   end
 
-  def show
-    @seminar = Seminar.find(params[:id])
-  end
 
   def new
     @seminar = Seminar.new
   end
-  def create
 
-    @seminar = Seminar.new(seminars_params)
+  def create
+   @seminar = Seminar.new(seminars_params)
     @seminar.user_id = current_user.id
     if @seminar.save
       if params[:images]
@@ -37,19 +34,14 @@ class SeminarsController < ApplicationController
     end
   end
 
-  def edit
-    @seminar = Seminar.find(params[:id])
-  end
-
   def update
-    @seminar = Seminar.find(params[:id])
     if current_user.id = @seminar.user_id
       if @seminar.update_attributes(seminars_params)
         if params[:images]
           @seminar.photos.each do |photo|
-            photos.destroy if photo.image_file_size.nil?
+            photo.destroy if photo.image_file_size.nil?
           end
-          params[:image].each do |image|
+          params[:images].each do |image|
             @seminar.photos.create(image: image)
           end
         else
@@ -72,11 +64,9 @@ class SeminarsController < ApplicationController
 
 
   def destroy
-    @seminar = Seminar.find(params[:id])
-    @seminar.destroy
-
-    respond_to do |format|
-      format.html {render action: 'index'}
+     @seminar = Seminar.find(params[:id])
+  @seminar.destroy
+   respond_to do |format|
       format.json { head :no_content }
       format.js   { render layout: false }
     end

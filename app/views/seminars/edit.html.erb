@@ -46,11 +46,11 @@
         <% @seminar.photos.each do |z| %>
           <div class="seminarimage">
             <% if !z.image_file_size.nil? %>
-              <%= image_tag z.image , class: "showimage" %>
-              <%= link_to "Delete Photo",photo_path(z), :method => :delete  , remote: true , class: "photo_delete"%>
+              <%= image_tag z.image(:thumb) , class: "showimage" %>
+              <%= link_to "Delete Photo",photo_path(z), method: :delete , remote: true , class: "photo_delete"%>
             <%else%>
               <p>
-                Προσθέστε μια φωτογραφία
+                Προσθέστε μια φωτογραφία 
               </p>
             <%end%>
           </div>

@@ -1,5 +1,6 @@
 class PhotosController < ApplicationController
   #before_action :require_user, only: [:index, :show]
+  before_action :find_photo, only:[:index,:show]
 
   def index
     @seminar = Seminar.find(params[:seminar_id])
@@ -13,7 +14,7 @@ class PhotosController < ApplicationController
   end
 
   def show
-    @photo = Photo.find(params[:id])
+    
 
     respond_to do |format|
       format.html # show.html.erb
@@ -29,10 +30,6 @@ class PhotosController < ApplicationController
       format.html # new.html.erb
       format.json { render json: @photo }
     end
-  end
-
-  def edit
-    @photo = Photo.find(params[:id])
   end
 
   def create
@@ -52,6 +49,9 @@ class PhotosController < ApplicationController
       render json: [{ error: 'custom_failure' }], status: 304
     end
   end
+  def edit
+     @photo = Photo.find(params[:id])
+  end
 
   def update
     @seminar = Seminar.find(params[:seminar_id])
@@ -70,7 +70,6 @@ class PhotosController < ApplicationController
   def destroy
     @photo = Photo.find(params[:id])
     @photo.destroy
-
     respond_to do |format|
       format.json { head :no_content }
       format.js   { render layout: false }
@@ -79,6 +78,9 @@ class PhotosController < ApplicationController
 
 
   private
+  def find_photo 
+    @photo = Photo.find(params[:id])
+  end
 
   def photo_params
     params.require.permit(:photo, :seminar_id,:image, :image_file_name, :image_content_type, :image_file_size)
