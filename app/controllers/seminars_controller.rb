@@ -12,11 +12,14 @@ class SeminarsController < ApplicationController
 
   def new
     @seminar = Seminar.new
+    @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
 
   def create
     @seminar = Seminar.new(seminars_params)
+    @seminar.category_id = params[:category_id]
     @seminar.user_id = current_user.id
+
     if @seminar.save
       if params[:images]
         params[:images].each do |image|
@@ -90,6 +93,6 @@ class SeminarsController < ApplicationController
   end
 
   def seminars_params
-    params.require(:seminar).permit(:title,:description,:author,:company,:price,:start_date,:end_date,:user_id,:photos)
+    params.require(:seminar).permit(:title,:description,:author,:company,:price,:start_date,:end_date,:user_id,:category_id,:photos)
   end
 end

@@ -42,6 +42,9 @@
         <label for="example-date-input"><%= f.label :end_date %></label>
         <%= f.date_field :end_date, class: "form-control" %>
       </div>
+      <div class="form-group">
+        <%= select_tag(:category_id, options_for_select(@categories), :prompt => "Select one!",class: "form-control") %>
+      </div>
       <% if @seminar.photos.exists? %>
         <% @seminar.photos.each do |z| %>
           <div class="seminarimage">
