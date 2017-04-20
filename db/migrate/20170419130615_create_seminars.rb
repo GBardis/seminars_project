@@ -5,7 +5,7 @@ class CreateSeminars < ActiveRecord::Migration[5.0]
       t.text   :description
       t.string :author
       t.string :company
-      t.decimal :price,precision: 12 , scale: 3 
+      t.decimal :price,precision: 12 , scale: 3
       t.date :start_date
       t.date :end_date
       t.references :user, index: true
