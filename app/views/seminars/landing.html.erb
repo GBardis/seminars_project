@@ -1,27 +1,31 @@
 <%= link_to "home", seminars_path%>
-
 <div class="container text-center">
-    <div class="row">
-        <div class="col-md-6 well">
-            <h3 style="font-weight: bold;">For attendes</h3>
-            <p>Lorem ipsum dolor sit amet, eu veri repudiare assueverit sed, eu errem patrioque eam. Ne tota homero philosophia pro. Nonumes verterem necessitatibus per te, suas homero placerat pri at. Ignota malorum corpora te pri, dolorem recteque gloriatur has ut, his at primis inimicus. An unum postea disputando vix, viderer splendide ius et. Prima exerci audiam sit ex, cu dolores temporibus vim.
-
-Eam ipsum civibus platonem ut. Sit option fabellas referrentur ad, pro dicunt consequuntur an. Eu sit vero tincidunt, cibo petentium ut per, cu aliquam adipiscing qui. Pri eu minim consulatu disputando, ad doctus legimus usu, eu quo justo perfecto.</p>
-             
-            <div>
-                <%= link_to 'Log in', new_user_session_path,class:"btn btn-primary btn-block",id:"orgLogin"%> 
-                    <%= link_to 'Register', new_user_registration_path, class:"btn btn-info btn-block",id:"orgReg"%>
-            </div>
-            </div> 
-            <div class="col-md-6  well">
-            <h3 style="font-weight: bold;">For organizers</h3>
-            <p>Lorem ipsum dolor sit amet, eu veri repudiare assueverit sed, eu errem patrioque eam. Ne tota homero philosophia pro. Nonumes verterem necessitatibus per te, suas homero placerat pri at. Ignota malorum corpora te pri, dolorem recteque gloriatur has ut, his at primis inimicus. An unum postea disputando vix, viderer splendide ius et. Prima exerci audiam sit ex, cu dolores temporibus vim.
-
-Eam ipsum civibus platonem ut. Sit option fabellas referrentur ad, pro dicunt consequuntur an. Eu sit vero tincidunt, cibo petentium ut per, cu aliquam adipiscing qui. Pri eu minim consulatu disputando, ad doctus legimus usu, eu quo justo perfecto.</p>
-                <div>
-                    <%= link_to 'Log in', new_user_session_path,class:"btn btn-primary btn-block",id:"orgLogin"%> 
-                    <%= link_to 'Register', new_user_registration_path, class:"btn btn-info btn-block",id:"orgReg"%>
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-md-6 well">
+      <h3 style="font-weight: bold;">For attendes</h3>
+      <p>Lorem ipsum dolor sit amet, eu veri repudiare assueverit sed, eu errem patrioque eam. Ne tota homero philosophia pro. Nonumes verterem necessitatibus per te, suas homero placerat pri at. Ignota malorum corpora te pri, dolorem recteque gloriatur has ut, his at primis inimicus. An unum postea disputando vix, viderer splendide ius et. Prima exerci audiam sit ex, cu dolores temporibus vim.
+        Eam ipsum civibus platonem ut. Sit option fabellas referrentur ad, pro dicunt consequuntur an. Eu sit vero tincidunt, cibo petentium ut per, cu aliquam adipiscing qui. Pri eu minim consulatu disputando, ad doctus legimus usu, eu quo justo perfecto.</p>
+      <div>
+        <%= link_to 'Log in', new_user_session_path,class:"btn btn-primary btn-block",id:"orgLogin"%>
+        <%= link_to 'Register', new_user_registration_path, class:"btn btn-info btn-block",id:"orgReg"%>
+      </div>
     </div>
+    <div id ="orgDiv" class="col-md-6  well">
+      <h3 style="font-weight: bold;">For organizers</h3>
+      <p>Lorem ipsum dolor sit amet, eu veri repudiare assueverit sed, eu errem patrioque eam. Ne tota homero philosophia pro. Nonumes verterem necessitatibus per te, suas homero placerat pri at. Ignota malorum corpora te pri, dolorem recteque gloriatur has ut, his at primis inimicus. An unum postea disputando vix, viderer splendide ius et. Prima exerci audiam sit ex, cu dolores temporibus vim.
+        Eam ipsum civibus platonem ut. Sit option fabellas referrentur ad, pro dicunt consequuntur an. Eu sit vero tincidunt, cibo petentium ut per, cu aliquam adipiscing qui. Pri eu minim consulatu disputando, ad doctus legimus usu, eu quo justo perfecto.</p>
+      <div>
+        <%= link_to 'Log in', new_user_session_path,class:"btn btn-primary btn-block",id:"orgLogin"%>
+        <%= link_to 'Register', new_user_registration_path, class:"btn btn-info btn-block",id:"orgReg"%>
+      </div>
+    </div>
+  </div>
+  <button id="test">Test</button>
 </div>
+<script>
+  $(document).ready(function(){
+                $("#orgLogin").on("click",function(){
+                $("#sap").slideToggle("slow");
+        });
+    });
+</script>
