@@ -7,15 +7,15 @@
     <li class="list-group-item"><%=@seminar.description%></li>
     <li class="list-group-item"><%=@seminar.author%></li>
     <li class="list-group-item"><%=@seminar.company%></li>
-    <li class="list-group-item"><%=@seminar.price%></li>
+    <li class="list-group-item"><%number_to_currency( @seminar.price,:unit => "€")%></li>
     <li class="list-group-item"><%=@seminar.start_date%></li>
     <li class="list-group-item"><%=@seminar.end_date%></li>
     <li class="list-group-item"><%=@seminar.user_id%></li>
     <li class="list-group-item"><%=@seminar.category_id%></li>
-    <% if current_user.organizer? || current_user.admin?%>
-      <li class="list-group-item"><%= link_to "Edit", edit_seminar_path(@seminar),class: "btn btn-success"%></li>
-      <li class="list-group-item"><%= link_to "Delete", seminar_path(@seminar),method: :delete,class: "btn btn-danger"%></li>
-    <%end%>
+    <%# if current_user.organizer? || current_user.admin?%>
+    <li class="list-group-item"><%= link_to "Edit", edit_seminar_path(@seminar),class: "btn btn-success"%></li>
+    <li class="list-group-item"><%= link_to "Delete", seminar_path(@seminar),method: :delete,class: "btn btn-danger"%></li>
+    <%#end%>
     <li class="list-group-item"><%= link_to "back", seminars_path%></li>
   </ul>
 </div>
