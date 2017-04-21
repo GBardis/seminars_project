@@ -61,13 +61,14 @@
       <%end%>
       <div class="control-group">
         <%= f.label :photos, :class => 'control-label' %>
-        <div class="controls">
-          <%= file_field_tag "images[]", type: :file, multiple: true  %>
+        <div class="form-group">
+          <%= file_field_tag "images[]", type: :file, multiple: true ,class: "form-control-file" %>
         </div>
       </div>
-      <%= f.submit nil , class: 'btn-submit' %>
-    </p>
-  <% end %>
-  <%= link_to 'Back', seminars_path %>
-</div>
+      <p>
+        <%= f.submit nil , class: 'btn btn-primary' %>
+      </p>
+    <% end %>
+    <%= link_to 'Back', seminars_path %>
+  </div>
 </div>

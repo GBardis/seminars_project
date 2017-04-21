@@ -1,5 +1,6 @@
 class SeminarsController < ApplicationController
   respond_to :html, :json
+  before_action :set_category,only:[:index]
   before_action :find_seminar, only: [:update,:show,:destroy,:edit]
   before_action :require_user, only:[:new,:edit,:destroy]
 
@@ -7,7 +8,7 @@ class SeminarsController < ApplicationController
   def landing
   end
   def index
-    @seminars = Seminar.all
+    @seminars = Seminar.includes(:photos).where(category_id: @category)
   end
 
   def new
@@ -35,10 +36,13 @@ class SeminarsController < ApplicationController
       end
     end
   end
-
+  def edit
+    @categories = Category.all.map{|c| [ c.name, c.id ] }
+  end
   def update
     if current_user.id = @seminar.user_id
       if @seminar.update_attributes(seminars_params)
+        @seminar.category_id = params[:category_id]
         if params[:images]
           @seminar.photos.each do |photo|
             photo.destroy if photo.image_file_size.nil?
@@ -50,12 +54,12 @@ class SeminarsController < ApplicationController
           @seminar.photos.create
         end
         respond_to do |format|
-          format.html { redirect_to @seminar, notice: 'Το σεμινάριο ενημερώθηκε επιτυχημένα' }
+          format.html { redirect_to seminar_path(@seminar), notice: 'Το σεμινάριο ενημερώθηκε επιτυχημένα' }
           format.json { head :no_content }
         end
       else
         respond_to do |format| ## Add this
-          format.html { render action: 'edit' }
+          format.html { redirect_to edit_seminar_path(@seminar) }
           format.json { render json: @seminar.errors, status: :unprocessable_entity }
           format.html
 
@@ -80,7 +84,9 @@ class SeminarsController < ApplicationController
     end
   end
 
-
+  def set_category
+    @category = Category.find(params[:category_id]) if params[:category_id]
+  end
   def require_owner
     unless current_user.id == Seminar.find(params[:id]).user_id
       flash[:notice] = 'Δεν έχετε δικαίωμα προσπέλασης'
