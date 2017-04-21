@@ -3,13 +3,16 @@ class SeminarsController < ApplicationController
   before_action :find_seminar, only: [:update,:show,:destroy,:edit]
   before_action :require_user, only:[:new,:edit,:destroy]
   before_action :disable_nav,only:[:landing]
-
-  #  before_action :require_owner
+  #before_action :require_owner,only:[:show]
   def landing
-   
+
   end
   def index
-    @seminars = Seminar.includes(:photos).where(category_id: @category)
+    if @category.present?
+      @seminars = Seminar.includes(:photos).where(category_id: @category)
+    else
+      @seminars = Seminar.all
+    end
   end
 
   def new
@@ -81,7 +84,7 @@ class SeminarsController < ApplicationController
   def require_user
     unless current_user
       flash[:notice] = 'Πρέπει να είστε μέλος για να έχετε πρόσβαση σε αυτή τη σελίδα'
-      redirect_to new_user_registration_path
+      redirect_to signup_path
     end
   end
   def disable_nav
@@ -91,9 +94,9 @@ class SeminarsController < ApplicationController
     @category = Category.find(params[:category_id]) if params[:category_id]
   end
   def require_owner
-    unless current_user.id == Seminar.find(params[:id]).user_id
+    unless (current_user.id == Seminar.find(params[:id]).user_id && current_user.organizer != false) || current_user.admin == true
       flash[:notice] = 'Δεν έχετε δικαίωμα προσπέλασης'
-      redirect_to Seminar.find(params[:id])
+      redirect_to seminars_path
     end
   end
 

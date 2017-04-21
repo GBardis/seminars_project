@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    
+
   def show
     @user = User.find(params[:id])
   end
@@ -7,12 +7,12 @@ class UsersController < ApplicationController
   def new
     @user = User.new
   end
-  
-    def show
+
+  def show
     @user = User.find(params[:id])
   end
 
-    def create
+  def create
     @user = User.new(user_params)
     if @user.save
       log_in @user
@@ -24,10 +24,10 @@ class UsersController < ApplicationController
   end
 
 
-  
+
   private
 
-    def user_params
-      params.require(:user).permit(:first_name,:last_name, :email,:attendee, :password,:password_confirmation)
-    end
+  def user_params
+    params.require(:user).permit(:first_name,:last_name, :email,:organizer, :password,:password_confirmation)
+  end
 end
