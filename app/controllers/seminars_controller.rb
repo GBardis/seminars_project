@@ -1,11 +1,12 @@
 class SeminarsController < ApplicationController
-  respond_to :html, :json
   before_action :set_category,only:[:index]
   before_action :find_seminar, only: [:update,:show,:destroy,:edit]
   before_action :require_user, only:[:new,:edit,:destroy]
+  before_action :disable_nav,only:[:landing]
 
   #  before_action :require_owner
   def landing
+   
   end
   def index
     @seminars = Seminar.includes(:photos).where(category_id: @category)
@@ -83,7 +84,9 @@ class SeminarsController < ApplicationController
       redirect_to new_user_registration_path
     end
   end
-
+  def disable_nav
+    @disable_nav = true
+  end
   def set_category
     @category = Category.find(params[:category_id]) if params[:category_id]
   end
