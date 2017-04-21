@@ -1,0 +1,19 @@
+<div class="container">
+  <ul class="list-group">
+    <div>
+      <%= image_tag @seminar.photos.first.image.url(:medium) %>
+    </div>
+    <li class="list-group-item"><%= @seminar.title%></li>
+    <li class="list-group-item"><%=@seminar.description%></li>
+    <li class="list-group-item"><%=@seminar.author%></li>
+    <li class="list-group-item"><%=@seminar.company%></li>
+    <li class="list-group-item"><%=@seminar.price%></li>
+    <li class="list-group-item"><%=@seminar.start_date%></li>
+    <li class="list-group-item"><%=@seminar.end_date%></li>
+    <li class="list-group-item"><%=@seminar.user_id%></li>
+    <li class="list-group-item"><%=@seminar.category_id%></li>
+    <li class="list-group-item"><%= link_to "Edit", edit_seminar_path(@seminar),class: "btn btn-success"%></li>
+    <li class="list-group-item"><%= link_to "Delete", seminar_path(@seminar),method: :delete,class: "btn btn-danger"%></li>
+    <li class="list-group-item"><%= link_to "back", seminars_path%></li>
+  </ul>
+</div>
