@@ -30,15 +30,19 @@ ActiveRecord::Schema.define(version: 20170421151243) do
   create_table "seminars", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
+    t.text     "participation_info"
+    t.integer  "phone"
+    t.string   "address"
+    t.string   "location"
     t.string   "author"
     t.string   "company"
-    t.decimal  "price",       precision: 12, scale: 3
+    t.decimal  "price",              precision: 12, scale: 3
     t.date     "start_date"
     t.date     "end_date"
     t.integer  "user_id"
     t.integer  "category_id"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.index ["category_id"], name: "index_seminars_on_category_id"
     t.index ["user_id"], name: "index_seminars_on_user_id"
   end

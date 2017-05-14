@@ -22,6 +22,18 @@
         <label><%= f.label :author %></label>
         <%= f.text_field :author, class: "form-control" %>
       </div>
+        <div class="form-group">
+        <label><%= f.label :phone %></label>
+        <%= f.number_field :phone, class: "form-control" %>
+      </div>
+       <div class="form-group">
+        <label><%= f.label :address %></label>
+        <%= f.text_field :address, class: "form-control" %>
+      </div>
+        <div class="form-group">
+        <label><%= f.label :location %></label>
+        <%= f.text_field :location, class: "form-control" %>
+      </div>
       <div class="form-group">
         <label><%= f.label :company %></label>
         <%= f.text_field :company, class: "form-control" %>
@@ -30,9 +42,14 @@
         <label><%= f.label :price %></label>
         <%= f.number_field :price, class: "form-control" %>
       </div>
-      <div class="form-group">
+         <div class="form-group">
         <label><%= f.label :description %></label>
-        <%= f.text_area :description, class: "form-control" %>
+        <%= f.text_area :description, :class => "tinymce", :rows => 15%>
+        <%= tinymce %>
+      </div>
+          <div class="form-group">
+        <label><%= f.label :participation_info %></label>
+        <%= f.text_area :participation_info, :class => "tinymce", :rows => 15%>
       </div>
       <div class="form-group">
         <label for="example-date-input"><%= f.label :start_date %></label>
@@ -53,13 +70,11 @@
             <% if !z.image_file_size.nil? %>
               <%= image_tag z.image(:thumb) , class: "showimage" %>
               <%= link_to "Delete Photo",photo_path(z), method: :delete , remote: true , class: "photo_delete"%>
-            <%else%>
-              <p>
-                Προσθέστε μια φωτογραφία
-              </p>
-            <%end%>
-          </div>
+          <%end%>
+             </div>
         <%end%>
+         <%else%>
+              <p>Προσθέστε μια φωτογραφία</p>
       <%end%>
       <div class="control-group">
         <%= f.label :photos, :class => 'control-label' %>

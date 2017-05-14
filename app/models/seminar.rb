@@ -10,4 +10,5 @@ class Seminar < ApplicationRecord
   validates :price, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
+  validates :category_id,presence:true
 end

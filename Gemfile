@@ -46,15 +46,14 @@ gem 'font-awesome-rails'
 gem 'font-awesome-sass'
 gem 'bootstrap-sass'
 gem 'jquery-turbolinks'
-gem 'binding_of_caller'
-gem 'better_errors'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
 end
 
 group :development do
-
+  gem 'binding_of_caller'
+  gem 'better_errors'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.0.5'

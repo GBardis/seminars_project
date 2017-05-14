@@ -1,23 +1,21 @@
 <div class="container" style="margin-top:10%;">
   <% @seminars.each do |seminar| %>
-    <div class="row">
+    <div class="row" >
       <div class="[ col-xs-12 col-sm-offset-2 col-sm-8 ]">
         <ul class="event-list">
           <li>
             <time datetime="2014-07-20 0000">
-              <span class="day"><%= seminar.start_date.strftime("%d")%></span>
-              <span class="month"><%= seminar.start_date.strftime("%m")%></span>
-              <span class="year">2014</span>
-              <span class="time">12:00 AM</span>
+               <%= image_tag seminar.photos.first.image.url(:large),width: "120", height: "120" %>
             </time>
             <div class="info">
               <h2 class="title"><%= link_to seminar_path(seminar),class:"title" do %>
                   <%= seminar.title%>
                 <%end%>
               </h2>
-              <p class="desc"><%= seminar.description%></p>
+              <p class="desc" ><%= truncate(seminar.description, length: 800, omission: "", escape: false)%>..</p>
               <ul>
-                <li style="width:50%;"><a href="#website"><span class="fa fa-globe"></span> Website</a></li>
+                <li style="width:25%;"><a href="#website"><span class="fa fa-globe"></span> Website</a></li>
+                <li style="width:25%;"><i class="fa fa-clock-o" aria-hidden="true"></i>  <%= seminar.start_date%></li>
                 <li style="width:50%;"><span class="fa fa-money"></span> <%=number_to_currency(seminar.price,:unit => "€")%></li>
               </ul>
             </div>
@@ -32,5 +30,6 @@
         </ul>
       </div>
     </div>
+    <%end%>
   </div>
-<%end%>
+

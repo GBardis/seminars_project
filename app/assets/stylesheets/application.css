@@ -53,8 +53,8 @@ body
     text-align: center;
     text-transform: uppercase;
 
-    color: rgb(255, 255, 255);
-    background-color: rgb(197, 44, 102);
+    /*color: rgb(255, 255, 255);*/
+    /*background-color: rgb(197, 44, 102);*/
 }
 .event-list > li:nth-child(even) > time
 {

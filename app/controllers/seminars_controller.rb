@@ -14,7 +14,10 @@ class SeminarsController < ApplicationController
       @seminars = Seminar.all
     end
   end
-
+   def show
+     @categories = Category.all
+   end
+  
   def new
     @seminar = Seminar.new
     @categories = Category.all.map{|c| [ c.name, c.id ] }
@@ -22,8 +25,8 @@ class SeminarsController < ApplicationController
 
   def create
     @seminar = Seminar.new(seminars_params)
-    @seminar.category_id = params[:category_id]
     @seminar.user_id = current_user.id
+    @seminar.category_id = params[:category_id]
     if @seminar.save
       if params[:images]
         params[:images].each do |image|
@@ -65,8 +68,6 @@ class SeminarsController < ApplicationController
         respond_to do |format| ## Add this
           format.html { redirect_to edit_seminar_path(@seminar) }
           format.json { render json: @seminar.errors, status: :unprocessable_entity }
-          format.html
-
         end
       end
     end
@@ -77,7 +78,10 @@ class SeminarsController < ApplicationController
     @seminar.destroy
     redirect_to seminars_path
   end
+  
   private
+ 
+  
   def find_seminar
     @seminar = Seminar.find(params[:id])
   end
@@ -101,6 +105,6 @@ class SeminarsController < ApplicationController
   end
 
   def seminars_params
-    params.require(:seminar).permit(:title,:description,:author,:company,:price,:start_date,:end_date,:user_id,:category_id,:photos)
+    params.require(:seminar).permit(:title,:phone,:address,:participation_info,:location,:description,:author,:company,:price,:start_date,:end_date,:user_id,:category_id,:photos)
   end
 end

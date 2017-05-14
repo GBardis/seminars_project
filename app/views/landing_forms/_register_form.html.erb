@@ -24,7 +24,8 @@
       <%= f.password_field :password_confirmation, class: 'form-control' %>
       </div>
       <div class="form-group">
-      <%= f.check_box :attendee %>
+        <%= f.label  "Check to get access to create seminars" %>
+      <%= f.check_box :organizer %>
       </div>
       <%= f.submit "Create my account", class: "btn btn-primary" %>
     <% end %>

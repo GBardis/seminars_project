@@ -1,21 +1,111 @@
-<div class="container">
-  <ul class="list-group">
-    <div>
-      <%= image_tag @seminar.photos.first.image.url(:medium) %>
+<!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+                <h1><%= @seminar.title%></h1>
+
+                <!-- Author -->
+                <p class="lead">
+                 Educational institution: <a href="#"><%=@seminar.company%></a>
+                </p>
+                <!-- Category -->
+                <p class="lead">
+                   Category: <a href="#"><%=@seminar.category.name%></a>
+                </p>
+                <hr>
+
+                <!-- Date/Time -->
+                <p><span class="glyphicon glyphicon-time"></span>  <label>Created At:</label> <%= @seminar.created_at.to_formatted_s(:long)%>  </p>
+              <%= link_to"Visit Seminar Location","https://www.google.com/maps/place/#{@seminar.location},#{@seminar.address}",target:"_blank"%>
+                <hr>
+
+                <!-- Preview Image -->
+                 <%= image_tag @seminar.photos.first.image.url(:large),class:"img-responsive" %>
+                <hr>
+                
+                <!-- Seminar Description -->
+         
+                <h4 style="text-decoration:underline;">Seminar Description</h4>
+              
+                <p class="lead"><%=@seminar.description.html_safe%></p>
+                <hr>
+                <!-- Participation Info -->
+         
+                <h4 style="text-decoration:underline;">Participation info</h4>
+              
+                <p class="lead"><%=@seminar.participation_info.html_safe%></p>
+         </div>
+
+            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+
+                <!-- Blog Search Well -->
+                <% if current_user%>
+                <% if current_user.admin? || current_user.organizer%>
+                <div class="well">
+                    <h4>Organizer tools</h4>
+                  
+                 <%= link_to "Edit", edit_seminar_path(@seminar),class: "btn btn-success"%>
+                  <%= link_to "Delete", seminar_path(@seminar),method: :delete,class: "btn btn-danger"%>
+                  
+                    <!-- /.input-group -->
+                </div>
+                <%end%>
+                <%end%>
+                <!-- Seminar Categories-->
+                 <div class="well">
+                 <h4>Blog Categories</h4>
+                  <div class="row">
+                <% @categories.in_groups_of(5,false) do |slice| %>
+                 <div class="col-lg-6">
+                  <% slice.each do |member| %>
+               
+                 <ul class="list-unstyled">
+                  <li><%= link_to member.name,category_seminars_path(member)%></li>
+                 </ul>
+                
+                <% end %>
+                </div>
+                <% end %>
+                  </div>
+                </div>
+
+                <!-- Side Widget Well -->
+                <div class="well">
+                    <h4>Seminar Details</h4>
+                     <ul class="list-unstyled">
+                     <li><label>Location:</label>  <%= @seminar.location%></li>
+                     <li><label>Address:</label>  <%= @seminar.address%></li>
+                     <li><label>Phone:</label>  <%= @seminar.phone%></li>
+                     <li><label>Start Date:</label>  <%= @seminar.start_date.to_formatted_s(:long)%></li>
+                     <li><label>End Date:</label>  <%= @seminar.end_date.to_formatted_s(:long)%></li>
+                     <li><label>Duration:</label>  <%= duration%></li>                  
+                     </ul>
+                  
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; <%=Time.now.strftime("%Y")%></p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
+
     </div>
-    <li class="list-group-item"><%= @seminar.title%></li>
-    <li class="list-group-item"><%=@seminar.description%></li>
-    <li class="list-group-item"><%=@seminar.author%></li>
-    <li class="list-group-item"><%=@seminar.company%></li>
-    <li class="list-group-item"><%number_to_currency( @seminar.price,:unit => "€")%></li>
-    <li class="list-group-item"><%=@seminar.start_date%></li>
-    <li class="list-group-item"><%=@seminar.end_date%></li>
-    <li class="list-group-item"><%=@seminar.user_id%></li>
-    <li class="list-group-item"><%=@seminar.category_id%></li>
-    <%# if current_user.organizer? || current_user.admin?%>
-    <li class="list-group-item"><%= link_to "Edit", edit_seminar_path(@seminar),class: "btn btn-success"%></li>
-    <li class="list-group-item"><%= link_to "Delete", seminar_path(@seminar),method: :delete,class: "btn btn-danger"%></li>
-    <%#end%>
-    <li class="list-group-item"><%= link_to "back", seminars_path%></li>
-  </ul>
-</div>
