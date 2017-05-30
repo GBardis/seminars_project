@@ -13,11 +13,13 @@ Rails.application.routes.draw do
   resources :photos
   get 'seminar/landing' => 'seminar#landing'
 
-#authentication 
+  #authentication
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   get  '/signup',  to: 'users#new'
   post '/signup',  to: 'users#create'
   resources :users
+
+  get 'e_learning' => 'seminars#e_learning'
 end

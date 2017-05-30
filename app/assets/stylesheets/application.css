@@ -279,3 +279,10 @@ body
         padding: 10px 0 9px;
     }
 }
+
+.portfolio-item
+{
+    margin-bottom: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
+}

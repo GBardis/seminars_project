@@ -7,6 +7,11 @@ class SeminarsController < ApplicationController
   def landing
 
   end
+
+  def e_learning
+
+  end
+
   def index
     if @category.present?
       @seminars = Seminar.includes(:photos).where(category_id: @category)
@@ -14,10 +19,10 @@ class SeminarsController < ApplicationController
       @seminars = Seminar.all
     end
   end
-   def show
-     @categories = Category.all
-   end
-  
+  def show
+    @categories = Category.all
+  end
+
   def new
     @seminar = Seminar.new
     @categories = Category.all.map{|c| [ c.name, c.id ] }
@@ -78,10 +83,10 @@ class SeminarsController < ApplicationController
     @seminar.destroy
     redirect_to seminars_path
   end
-  
+
   private
- 
-  
+
+
   def find_seminar
     @seminar = Seminar.find(params[:id])
   end
